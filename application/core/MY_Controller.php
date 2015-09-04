@@ -11,8 +11,8 @@ class MY_Controller extends CI_Controller
         $this->data['website'] = $this->config->item('website_name','app_config');
         $this->data['page_title'] = $this->data['website'];
         $this->data['page_description'] = $this->config->item('website_description','app_config');;
-		$this->data['before_head'] = '';
-		$this->data['before_body'] = '';
+		$this->data['before_closing_head'] = '';
+		$this->data['before_closing_body'] = '';
 	}
 
 	protected function render($the_view = NULL, $template = 'master')
@@ -96,8 +96,8 @@ class Public_Controller extends MY_Controller
 
     protected function render($the_view = NULL, $template = 'public_master')
     {
-        $this->load->library('menus');
-        $this->data['top_menu'] = $this->menus->get_menu('top-menu','bootstrap_menu');
+        //$this->load->library('menus');
+        //$this->data['top_menu'] = $this->menus->get_menu('top-menu','bootstrap_menu');
         parent::render($the_view, $template);
     }
 

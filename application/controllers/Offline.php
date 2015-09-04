@@ -9,7 +9,7 @@ class Offline extends Public_Controller
 	
 	public function index()
 	{
-        $this->load->view('welcome_message');
+        $this->render('offline_view');
 	}
 }
 /* End of file '/Offline.php' */
