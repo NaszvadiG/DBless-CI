@@ -43,22 +43,13 @@ class Admin_Controller extends MY_Controller
 
         $this->load->library(array('session','form_validation'));
         // if user is not logged in redirect
-        if (!$_SESSION['logged_in'])
+        if (!isset($_SESSION['logged_in']))
         {
+            echo 'not logged in';
             //redirect them to the login page
             redirect('admin/user/login', 'refresh');
         }
-        $current_user = $this->ion_auth->user()->row();
-        $this->user_id = $current_user->id;
-        $_SESSION['user_id'] = $this->user_id;
-        $this->data['current_user'] = $current_user;
-		$this->data['current_user_menu'] = '';
-		if($this->ion_auth->in_group('admin'))
-		{
-			$this->data['current_user_menu'] = $this->load->view('templates/_parts/user_menu_admin_view.php', NULL, TRUE);
-		}
-
-		$this->data['page_title'] = 'CI App - Dashboard';
+        $this->data['page_title'] = 'CI App - Dashboard';
 	}
 	protected function render($the_view = NULL, $template = 'admin_master')
 	{

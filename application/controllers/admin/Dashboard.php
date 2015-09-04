@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Offline extends Public_Controller
+class Dashboard extends Admin_Controller
 {
 	public function __construct()
 	{
@@ -9,8 +9,8 @@ class Offline extends Public_Controller
 	
 	public function index()
 	{
-        $this->render('offline_view');
+		echo '...';
 	}
 }
-/* End of file '/Offline.php' */
-/* Location: ./application/controllers//Offline.php */
+/* End of file 'admin/Dashboard.php' */
+/* Location: ./application/controllers/admin/Dashboard.php */

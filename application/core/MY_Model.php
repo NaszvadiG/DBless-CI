@@ -20,15 +20,19 @@ class MY_Model
                 $data = file_get_contents($file_location);
                 $this->_data = unserialize($data);
             }
-            else
-            {
-                fopen($file_location,'w');
-
-            }
-            echo '<pre>';
-            print_r($this->_data);
-            echo '</pre>';
         }
         return TRUE;
+    }
+
+    public function save_all_data()
+    {
+        $file_location = APPPATH.'data/'.$this->data_file.'.txt';
+        $write = serialize($this->_data);
+        $result = file_put_contents($file_location,$write,LOCK_EX);
+        if($result!==FALSE)
+        {
+            return TRUE;
+        }
+        return FALSE;
     }
 }

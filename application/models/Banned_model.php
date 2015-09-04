@@ -2,7 +2,6 @@
 class Banned_model extends MY_Model
 {
     public $data_file = 'banned';
-    public $encrypted = TRUE;
     public function __construct()
 	{
 		parent::__construct();
