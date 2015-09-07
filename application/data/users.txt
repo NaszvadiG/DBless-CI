@@ -1,1 +1,1 @@
-a:1:{s:19:"avenir.ro@gmail.com";a:3:{s:8:"username";s:4:"test";s:5:"email";s:19:"avenir.ro@gmail.com";s:8:"password";s:64:"12bd421b692386fefffbf07017fb9dbd1860608781f7ab16fd783b3cdaab3b25";}}
+a:1:{s:19:"avenir.ro@gmail.com";a:3:{s:8:"username";s:8:"avenirer";s:5:"email";s:19:"avenir.ro@gmail.com";s:8:"password";s:64:"949c6d32680d781d1cb70e8c40b8dfcc0c40e5e18f81149e06dd055fcd23a20d";}}

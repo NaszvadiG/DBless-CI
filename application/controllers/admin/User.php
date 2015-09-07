@@ -24,6 +24,30 @@ class User extends Public_Controller
         if(empty($users))
         {
             redirect('admin/user/register');
+            exit;
+        }
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('username','Username','trim|required');
+        $this->form_validation->set_rules('password','Password','trim|required');
+        if($this->form_validation->run()===FALSE)
+        {
+            $this->render('users/login_view');
+        }
+        else
+        {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            if($this->user_model->login($username,$password)===TRUE)
+            {
+                $_SESSION['logged_in'] = $username;
+                redirect('admin');
+            }
+            else
+            {
+                $this->data['message'] = 'Username/password combination is wrong';
+                $this->render('users/login_view');
+            }
         }
 	}
 

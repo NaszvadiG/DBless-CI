@@ -12,6 +12,22 @@ class User_model extends MY_Model
         return $this->_data;
     }
 
+    public function login($username,$password)
+    {
+        $exists = FALSE;
+        $the_pass = hash('sha256',$password);
+        $users = $this->_data;
+        if(!empty($users))
+        {
+            foreach($users as $user)
+            {
+                if(($user['username'] == $username) && $user['password'] = $the_pass);
+                $exists = TRUE;
+            }
+        }
+        return $exists;
+    }
+
     public function register($username, $email, $password)
     {
         $users = $this->_data;
