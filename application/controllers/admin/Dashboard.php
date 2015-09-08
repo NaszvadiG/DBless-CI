@@ -9,7 +9,7 @@ class Dashboard extends Admin_Controller
 	
 	public function index()
 	{
-		echo '...';
+		$this->render('admin/dashboard_view');
 	}
 }
 /* End of file 'admin/Dashboard.php' */

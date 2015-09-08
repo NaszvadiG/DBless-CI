@@ -1,29 +1,22 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
     <!DOCTYPE html>
-<html>
+    <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo $page_title;?></title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo site_url('assets/js/moment.js');?>"></script>
-        <script type="text/javascript" src="<?php echo site_url('/assets/js/jquery.knob.js');?>"></script>
-        <link href="<?php echo site_url('assets/css/bootstrap.min.css');?>" rel="stylesheet">
-        <link href="<?php echo site_url('assets/css/bootstrap-datetimepicker.min.css');?>" rel="stylesheet">
-        <?php echo $before_head;?>
-        <!--<link rel="stylesheet" href="<?php echo site_url('assets/css/textext/textext.plugin.focus.css');?>" type="text/css" />-->
-        <!--<link rel="stylesheet" href="<?php echo site_url('assets/css/textext/textext.plugin.prompt.css');?>" type="text/css" />-->
-        <script src="<?php echo site_url('assets/js/textext.core.js');?>" type="text/javascript" charset="utf-8"></script>
-        <script src="<?php echo site_url('assets/js/textext.plugin.tags.js');?>" type="text/javascript" charset="utf-8"></script>
-        <script src="<?php echo site_url('assets/js/textext.plugin.autocomplete.js');?>" type="text/javascript" charset="utf-8"></script>
-        <!--<script src="<?php echo site_url('assets/js/textext.plugin.suggestions.js');?>" type="text/javascript" charset="utf-8"></script>-->
-        <script src="<?php echo site_url('assets/js/textext.plugin.filter.js');?>" type="text/javascript" charset="utf-8"></script>
-        <!--<script src="<?php echo site_url('assets/js/textext.plugin.focus.js');?>" type="text/javascript" charset="utf-8"></script>-->
-        <!--<script src="<?php echo site_url('assets/js/textext.plugin.prompt.js');?>" type="text/javascript" charset="utf-8"></script>-->
-        <script src="<?php echo site_url('assets/js/textext.plugin.ajax.js');?>" type="text/javascript" charset="utf-8"></script>
-        <script src="<?php echo site_url('assets/js/textext.plugin.arrow.js');?>" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript" src="<?php echo site_url('assets/js/tinymce/tinymce.min.js');?>"></script>
+        <script type="text/javascript" src="<?php echo site_url('assets/admin/js/moment.js');?>"></script>
+        <link href="<?php echo site_url('assets/admin/css/bootstrap.min.css');?>" rel="stylesheet">
+        <link href="<?php echo site_url('assets/admin/css/bootstrap-datetimepicker.min.css');?>" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo site_url('assets/admin/css/textext/textext.core.css');?>" type="text/css" />
+        <link rel="stylesheet" href="<?php echo site_url('assets/admin/css/textext/textext.plugin.autocomplete.css');?>" type="text/css" />
+        <script src="<?php echo site_url('assets/admin/js/textext.core.js');?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo site_url('assets/admin/js/textext.plugin.autocomplete.js');?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo site_url('assets/admin/js/textext.plugin.filter.js');?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo site_url('assets/admin/js/textext.plugin.ajax.js');?>" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="<?php echo site_url('assets/admin/js/tinymce/tinymce.min.js');?>"></script>
         <script type="text/javascript">
             tinymce.init({
                 selector: ".editor",
@@ -84,10 +77,11 @@
                 ]
             });
         </script>
+        <?php echo $before_closing_head;?>
     </head>
 <body>
 <?php
-if($this->ion_auth->logged_in()) {
+if($_SESSION['logged_in']) {
     ?>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -100,34 +94,46 @@ if($this->ion_auth->logged_in()) {
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand"
-                   href="<?php echo site_url();?>"><?php echo $website->title;?></a>
+                   href="<?php echo site_url('admin');?>"><?php echo $website;?></a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li>...</li>
+                    <li><?php echo anchor('admin/menus','Menus');?></li>
+                    <li><?php echo anchor('admin/contents/index/page','Pages');?></li>
+                    <li><?php echo anchor('admin/contents/index/category','Categories');?></li>
+                    <li><?php echo anchor('admin/contents/index/post','Posts');?></li>
+                    <li><?php echo anchor('admin/rake','RAKE Tool');?></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <?php
-                    if($this->ion_auth->is_admin()) {
-                        ?>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Take care! <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="<?php echo site_url('master');?>">Website settings</a></li>
-                            </ul>
-                        </li>
-                    <?php
-                    }
-                        ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Multilanguage <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo site_url('admin/languages');?>">Languages</a></li>
+                            <li class="divider"></li>
+                            <?php
+                            foreach($langs as $slug=>$language)
+                            {
+                                echo '<li>';
+                                echo anchor('admin/dictionary/index/'.$slug.'/1','Dictionary '.$language['name']);
+                                echo '</li>';
+                            }
+                            ?>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Take care! <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo site_url('admin/master');?>">Website settings</a></li>
+                        </ul>
+                    </li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $this->ion_auth->user()->row()->username;?> <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $_SESSION['logged_in'];?> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo site_url('users/profile');?>">Profile page</a></li>
+                            <li><a href="<?php echo site_url('admin/user/profile');?>">Profile page</a></li>
                             <?php echo $current_user_menu;?>
                             <li class="divider"></li>
-                            <li><a href="<?php echo site_url('user/logout');?>">Logout</a></li>
+                            <li><a href="<?php echo site_url('admin/user/logout');?>">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -135,7 +141,7 @@ if($this->ion_auth->logged_in()) {
             <!--/.nav-collapse -->
         </div>
     </nav>
-    <div class="container" style="margin-top:60px;">
+    <div class="container" style="padding-top:60px;">
         <?php
         echo $this->postal->get();
         ?>
