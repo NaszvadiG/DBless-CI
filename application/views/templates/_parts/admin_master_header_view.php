@@ -102,7 +102,6 @@ if($_SESSION['logged_in']) {
                     <li><?php echo anchor('admin/contents/index/page','Pages');?></li>
                     <li><?php echo anchor('admin/contents/index/category','Categories');?></li>
                     <li><?php echo anchor('admin/contents/index/post','Posts');?></li>
-                    <li><?php echo anchor('admin/rake','RAKE Tool');?></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -123,6 +122,7 @@ if($_SESSION['logged_in']) {
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Take care! <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo site_url('admin/templates');?>">Templates</a></li>
                             <li><a href="<?php echo site_url('admin/master');?>">Website settings</a></li>
                         </ul>
                     </li>

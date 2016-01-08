@@ -45,11 +45,9 @@ class Admin_Controller extends MY_Controller
         // if user is not logged in redirect
         if (!isset($_SESSION['logged_in']))
         {
-            echo 'not logged in';
-            //redirect them to the login page
-            redirect('admin/user/login', 'refresh');
+            redirect('admin/user/login');
         }
-        $this->data['page_title'] = 'CI App - Dashboard';
+        $this->data['page_title'] = 'Dashboard - '.$this->data['website'];
 	}
 	protected function render($the_view = NULL, $template = 'admin_master')
 	{

@@ -2,6 +2,7 @@
 class User_model extends MY_Model
 {
     public $data_file = 'users';
+    public $key_field = 'email';
     public function __construct()
     {
         parent::__construct();
